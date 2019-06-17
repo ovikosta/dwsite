@@ -4,7 +4,6 @@ import sys
 import os
 import argparse
 import requests
-import ssl
 #from html.parser import HTMLParser
 
 def create_parser_arg():
