@@ -64,14 +64,7 @@ if __name__ == '__main__':
     args = create_parser_arg()
     args = args.parse_args()
     path = args.url
-    name = 'index'
-    html_page = get_page(path)
-    flag = 1
-    while flag:
-        all_path = set([html_pattern.match(m) for m in parse_html(html_page)])
-        for path in all_path:
-            
-    write_file(name, args.destination, html_page)
-    print(set([ html_pattern.match(m) for m in parse_html(html_page)]))
+    #cycle for all page in site and add all href in set
+    #after download and write this page
 
 
