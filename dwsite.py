@@ -6,6 +6,9 @@ import argparse
 import requests
 from html.parser import HTMLParser
 
+ROOT_PATH = ''
+ALL_PATH = set()
+
 class SiteParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
@@ -44,13 +47,14 @@ def parse_html(data):
     site_parser = SiteParser()
     site_parser.feed(data)
     site_parser.close()
-    return site_parser.href_site
-
+    ALL_PATH = {m for m in site_parser.href_site if ROOT_PATH in m}
+    return ALL_PATH
 
 if __name__ == '__main__':
     args = create_parser_arg()
     args = args.parse_args()
-    data = get_site(args.url)
-    write_file('index', data, args.destination)
-    print(parse_html(data))
+    ROOT_PATH = args.url
+    html_page = get_site(ROOT_PATH)
+    write_file('index', html_page, args.destination)
+    print(parse_html(html_page))
 
